@@ -17,6 +17,22 @@ namespace Diplom.Shared.Model
         HALF_YEAR,
         YEAR
     }
+    
+    enum FormState
+    {
+        CLEAR,
+        IN_WORK,
+        FILLED,
+        CHECKED,
+        SUBMITTED
+    }
+
+    class ReportForm
+    {
+        public ReportFormHead FormHead { get; set; }
+        public ReportFormData FormData { get; set; }
+        public FormState State{ get; set; }
+    }
 
     class ReportFormHead
     {
@@ -34,10 +50,35 @@ namespace Diplom.Shared.Model
 
     class ReportFormData
     {
-
-
+        //PrimaryKey
         public ReportFormHead FormHead { get; set; }
         public Organisation Organisation { get; set; }
-        public int MyProperty { get; set; }
+        public ReportPeriod ReportPeriod { get; set; }
+
+        //fields
+        public string RowCode { get; set; }
+
+        public decimal C1 { get; set; }
+        public decimal C2 { get; set; }
+        public decimal C3 { get; set; }
+        public decimal C4 { get; set; }
+        public decimal C5 { get; set; }
+        public decimal C6 { get; set; }
+        public decimal C7 { get; set; }
+        public decimal C8 { get; set; }
+        public decimal C9 { get; set; }
+        public decimal C10 { get; set; }
+        public decimal C11 { get; set; }
+        public decimal C12 { get; set; }
+        public decimal C13 { get; set; }
+        public decimal C14 { get; set; }
+        public decimal C15 { get; set; }
+        public decimal C16 { get; set; }
+        public decimal C17 { get; set; }
+        public decimal C18 { get; set; }
+        public decimal C19 { get; set; }
+        public decimal C20 { get; set; }
+        public decimal C21 { get; set; }
+        public decimal C22 { get; set; }
     }
 }
