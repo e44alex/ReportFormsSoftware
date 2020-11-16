@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blazored.LocalStorage;
 using Diplom.Shared.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,7 +36,11 @@ namespace BlazorApp1
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
-
+            services.AddScoped<AppDbContext>(p =>
+                p.GetRequiredService<IDbContextFactory<AppDbContext>>()
+                    .CreateDbContext());
+            services.AddBlazoredLocalStorage(options => 
+                options.JsonSerializerOptions.WriteIndented = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

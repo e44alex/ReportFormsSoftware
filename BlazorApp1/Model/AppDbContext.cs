@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Diplom.Shared.Model
 {
-    class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<ReportForm> ReportForms { get; set; }

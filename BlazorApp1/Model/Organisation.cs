@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Diplom.Shared.Model
 {
-    class Organisation
+    public class Organisation
     {
         public int UNK { get; set; }
         public string Name { get; set; }
