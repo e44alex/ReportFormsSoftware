@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diplom.Server", "Diplom\Server\Diplom.Server.csproj", "{8B7C8847-46C9-434B-8348-FE7A08611E74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diplom.Server", "Diplom\Server\Diplom.Server.csproj", "{8B7C8847-46C9-434B-8348-FE7A08611E74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diplom.Client", "Diplom\Client\Diplom.Client.csproj", "{1FDBED4D-5AA8-4681-8638-B15E11F3F085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diplom.Client", "Diplom\Client\Diplom.Client.csproj", "{1FDBED4D-5AA8-4681-8638-B15E11F3F085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diplom.Shared", "Diplom\Shared\Diplom.Shared.csproj", "{95A142DE-A1E8-4688-BCD1-2EB7FB2C180C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diplom.Shared", "Diplom\Shared\Diplom.Shared.csproj", "{95A142DE-A1E8-4688-BCD1-2EB7FB2C180C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
