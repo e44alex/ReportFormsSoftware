@@ -4,21 +4,21 @@ using System.Text;
 
 namespace Diplom.Shared.Model
 {
-    enum FormType
+    public enum FormType
     {
        PERIODIC,
        NON_PERIODIC
     }
 
-    enum PeriodicFormType
+    public enum PeriodicFormType
     {
         MONTH,
         QUARTER,
         HALF_YEAR,
         YEAR
     }
-    
-    enum FormState
+
+    public enum FormState
     {
         CLEAR,
         IN_WORK,
@@ -27,7 +27,7 @@ namespace Diplom.Shared.Model
         SUBMITTED
     }
 
-    class ReportForm
+    public class ReportForm
     {
         public Guid FormHeadId { get; set; }
         public Guid FormDataId{ get; set; }
@@ -37,7 +37,7 @@ namespace Diplom.Shared.Model
         public FormState State{ get; set; }
     }
 
-    class ReportFormHead
+    public class ReportFormHead
     {
         public Guid Id { get; set; }
         public int Cls { get; set; } // классификатор
@@ -49,15 +49,16 @@ namespace Diplom.Shared.Model
         public int SubProgram { get; set; }//Под Программа
         public FormType Type { get; set; }
         public PeriodicFormType PeriodicType { get; set; }
+        public int OrganisationId { get; set; }
+        public Organisation Organisation { get; set; }
+        public ReportPeriod ReportPeriod { get; set; }
     }
 
-    class ReportFormData
+    public class ReportFormData
     {
         //PrimaryKey
         public Guid FormHeadId { get; set; }
         public ReportFormHead FormHead { get; set; }
-        public int OrganisationId { get; set; }
-        public Organisation Organisation { get; set; }
         public Guid ReportPeriodId { get; set; }
         public ReportPeriod ReportPeriod { get; set; }
 

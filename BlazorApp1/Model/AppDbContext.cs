@@ -17,15 +17,15 @@ namespace Diplom.Shared.Model
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
 
-        public AppDbContext()
-        { }
+        //public AppDbContext()
+        //{ }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasKey(u => u.Username);
             modelBuilder.Entity<Organisation>().HasKey(Organisation => Organisation.UNK);
             modelBuilder.Entity<ReportForm>().HasKey(q => new { q.FormHeadId, q.FormDataId });
-            modelBuilder.Entity<ReportFormData>().HasKey(q => new { q.FormHeadId, q.OrganisationId, q.RowCode, q.ReportPeriodId });
+            modelBuilder.Entity<ReportFormData>().HasKey(q => new { q.FormHeadId, q.RowCode, q.ReportPeriodId });
             modelBuilder.Entity<ReportFormHead>().HasKey(q => q.Id);
 
         }

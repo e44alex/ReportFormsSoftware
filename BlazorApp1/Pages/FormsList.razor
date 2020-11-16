@@ -1,4 +1,9 @@
-﻿@page "/formList"
+﻿@page "/formList/{orgId:int}"
+@using Diplom.Shared.Model
+@using Microsoft.EntityFrameworkCore
+@using Blazored.LocalStorage
+@inject IDbContextFactory<AppDbContext> DbContextFactory
+@inject ILocalStorageService LocalStorage
 
 <h1>Список форм</h1>
 
@@ -47,6 +52,24 @@
 
 @code{
 
+    [Parameter]
+    public int OrgId { get; set; }
 
+    public List<ReportForm> ReportForm { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var _context = DbContextFactory.CreateDbContext();
+
+        try
+        {
+            ReportForm = await _context.ReportForms.Where(x => x.FormHead.OrganisationId == OrgId).ToListAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 
 }

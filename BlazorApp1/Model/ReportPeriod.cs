@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Diplom.Shared.Model
 {
-    class ReportPeriod
+    public class ReportPeriod
     {
         public Guid Id { get; set; }
 

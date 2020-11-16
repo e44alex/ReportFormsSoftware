@@ -97,12 +97,21 @@
     private string GetUserName()
     {
         StringBuilder builder = new StringBuilder();
-        builder.Append(User.Surname)
-            .Append(" ")
-            .Append(User.Name[0])
-            .Append('.')
-            .Append(User.Patronym[0])
-            .Append('.');
+        try
+        {
+            //builder.Append(User.Surname)
+            //    .Append(" ")
+            //    .Append(User.Name[0])
+            //    .Append('.')
+            //    .Append(User.Patronym[0])
+            //    .Append('.');
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            //throw;
+        }
 
         return builder.ToString();
     }
@@ -111,18 +120,38 @@
     {
         var _context = DbFactory.CreateDbContext();
 
-        try
+        //try
+        //{
+        //    User = await _context.Users.FindAsync(await LocalStorage.GetItemAsStringAsync("username"));
+        //    ChildOrgs = await _context
+        //                        .Organisations
+        //                        .Where(x => x.HigherOrg == User.Organisation)
+        //                        .ToListAsync();
+
+        //}
+        //catch (Exception e)
+        //{
+        //    Console.WriteLine(e);
+        //}
+
+        User = new User()
         {
-            User = await _context.Users.FindAsync(LocalStorage.GetItemAsStringAsync("username"));
-            ChildOrgs = await _context
-                                .Organisations
-                                .Where(x => x.HigherOrg == User.Organisation)
-                                .ToListAsync();
-        }
-        catch (Exception e)
+            Name = "name",
+            Address = "",
+            Organisation = new Organisation(),
+            Patronym = "",
+            Surname = "",
+                            
+        };
+        ChildOrgs = new List<Organisation>()
         {
-            Console.WriteLine(e);
-            throw;
-        }
+            new Organisation()
+            {
+                Name = "Org1",
+                Address = "",
+                Principal = "",
+                
+            }
+        };
     }
 }

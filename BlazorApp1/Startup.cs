@@ -32,7 +32,12 @@ namespace BlazorApp1
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddDbContext<AppDbContext>(options =>
+            //services.AddDbContext<AppDbContext>(options =>
+            //{
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            //});
+
+            services.AddDbContextFactory<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
