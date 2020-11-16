@@ -1,7 +1,83 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<h1>Моё учреждение</h1>
 
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="card-columns">
+    <div class="card card-body" style="width: 40rem">
+        <div>
+            <h2>Пользователь:</h2>
+            <form>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputEmail3" placeholder="User Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Organization</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation ">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card card-body" style="width: 40rem">
+        <div>
+            <h2>Учреждение:</h2>
+            <form>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Address</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation Address">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Principal</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation Principal">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Contacts</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation Contacts">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
+<div class="card card-body" style="width: 100rem">
+    <table class="table table-borderless">
+        <tr>
+            <th>Дочерние учреждения:</th>
+        </tr>
+        <tr>
+            <td>
+                <button class="btn btn-outline-info">
+                    Учреждение1     
+                </button>       
+            </td>               
+        </tr>                   
+        <tr>                    
+            <td>                
+                <button class="btn btn-outline-info">
+                    Учреждение2 
+                </button></td>  
+        </tr>                   
+        <tr>                    
+            <td>                
+                <button class="btn btn-outline-info">
+                    Учреждение3
+                </button></td>
+        </tr>
+    </table>
+</div>
