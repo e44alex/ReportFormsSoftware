@@ -46,6 +46,7 @@ namespace BlazorApp1
                     .CreateDbContext());
             services.AddBlazoredLocalStorage(options => 
                 options.JsonSerializerOptions.WriteIndented = true);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

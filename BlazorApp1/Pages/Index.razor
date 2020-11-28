@@ -8,83 +8,92 @@
 @inject ILocalStorageService LocalStorage
 
 <h1>Моё учреждение</h1>
+@if (User == null)
+{
+    <p>Loading...</p>
+}
+else
+{
 
-<div class="card-columns">
-    <div class="card card-body" style="width: 40rem">
-        <div>
-            <h2>Пользователь:</h2>
-            <form>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">ФИО</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="User Name" value="@GetUserName()">
+    <div class="card-columns">
+        <div class="card card-body" style="width: 40rem">
+            <div>
+
+                <h2>Пользователь:</h2>
+                <form>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">ФИО</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="User Name" value="@GetUserName()">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Учреждение</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation" value="@User.Organisation.Name">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Учреждение</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation" value="@User.Organisation.Name">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Должность</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation" value="Бухгалтер">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Должность</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation" value="Бухгалтер">
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="card card-body" style="width: 40rem">
-        <div>
-            <h2>Учреждение:</h2>
-            <form>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation Name" value="@User.Organisation.Name">
+        <div class="card card-body" style="width: 40rem">
+            <div>
+                <h2>Учреждение:</h2>
+                <form>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation Name" value="@User.Organisation.Name">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Address</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation Address" value="@User.Organisation.Address">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Address</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation Address" value="@User.Organisation.Address">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Principal</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation Principal" value="@User.Organisation.Principal">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Principal</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation Principal" value="@User.Organisation.Principal">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Contacts</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation Contacts" value="@User.Organisation.Address">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Contacts</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="Organisation Contacts" value="@User.Organisation.Address">
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
+
     </div>
-    
-</div>
-<div class="card card-body" style="width: 100rem">
-    <table class="table table-borderless">
-        <tr>
-            <th>Дочерние учреждения:</th>
-        </tr>
-        @foreach (var org in ChildOrgs)
-        {
+    <div class="card card-body" style="width: 100rem">
+        <table class="table table-borderless">
             <tr>
-                <td>
-                    <a class="btn btn-outline-info" href="/formsList?orgId={@org.UNK}">
-                        @org.Name
-                    </a>       
-                </td>               
-            </tr> 
-        }
-    </table>
-</div>
+                <th>Дочерние учреждения:</th>
+            </tr>
+            @foreach (var org in ChildOrgs)
+            {
+                <tr>
+                    <td>
+                        <a class="btn btn-outline-info" href="/formsList?orgId={@org.UNK}">
+                            @org.Name
+                        </a>
+                    </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+}
 
 @code
 {
@@ -99,12 +108,12 @@
         StringBuilder builder = new StringBuilder();
         try
         {
-            //builder.Append(User.Surname)
-            //    .Append(" ")
-            //    .Append(User.Name[0])
-            //    .Append('.')
-            //    .Append(User.Patronym[0])
-            //    .Append('.');
+            builder.Append(User.Surname)
+                .Append(" ")
+                .Append(User.Name[0])
+                .Append('.')
+                .Append(User.Patronym[0])
+                .Append('.');
 
         }
         catch (Exception e)
@@ -120,38 +129,23 @@
     {
         var _context = DbFactory.CreateDbContext();
 
-        //try
-        //{
-        //    User = await _context.Users.FindAsync(await LocalStorage.GetItemAsStringAsync("username"));
-        //    ChildOrgs = await _context
-        //                        .Organisations
-        //                        .Where(x => x.HigherOrg == User.Organisation)
-        //                        .ToListAsync();
-
-        //}
-        //catch (Exception e)
-        //{
-        //    Console.WriteLine(e);
-        //}
-
-        User = new User()
+        try
         {
-            Name = "name",
-            Address = "",
-            Organisation = new Organisation(),
-            Patronym = "",
-            Surname = "",
-                            
-        };
-        ChildOrgs = new List<Organisation>()
+            //User = await _context.Users.FindAsync(await LocalStorage.GetItemAsStringAsync("username"));
+            User = await _context.Users
+                .Include(u => u.Organisation)
+                .FirstOrDefaultAsync(x=> x.Username == "test");
+            
+            ChildOrgs =  await _context
+                                .Organisations
+                                .Where(x=> x.HigherOrg == User.Organisation)
+                                .ToListAsync();
+            
+        }
+        catch (Exception e)
         {
-            new Organisation()
-            {
-                Name = "Org1",
-                Address = "",
-                Principal = "",
-                
-            }
-        };
+            Console.WriteLine(e);
+        }
+
     }
 }

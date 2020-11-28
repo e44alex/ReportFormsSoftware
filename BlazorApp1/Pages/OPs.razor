@@ -52,12 +52,19 @@
     </div>
 </div>
 
+@if (Periods == null)
+{
+    <p>Loading...</p>
+}
+else
+{
 <table class="table table-bordered">
     <tr>
         <th>Наименование</th>
         <th>Дата начала</th>
         <th>Дата Окончания</th>
     </tr>
+
     @foreach (var period in Periods)
     {
         <tr>
@@ -70,6 +77,8 @@
     }
 
 </table>
+}
+
 
 
 
@@ -99,32 +108,34 @@
     {
         _context = DbContextFactory.CreateDbContext();
 
-        //try
-        //{
-        //    Periods = await _context.ReportPeriods.ToListAsync();
-        //}
-        //catch (Exception e)
-        //{
-        //    Console.WriteLine(e);
-        //    throw;
-        //}
-
-        Periods= new List<ReportPeriod>()
+        try
         {
-            new ReportPeriod()
-            {
-                Name = "OP1",
-                EndDate = DateTime.MaxValue,
-                StartDate = DateTime.MinValue
-            }
-        };
+            Periods = await _context.ReportPeriods
+                .OrderBy(x => x.StartDate)
+                .ToListAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        //Periods = new List<ReportPeriod>()
+        //{
+        //    new ReportPeriod()
+        //    {
+        //        Name = "OP1",
+        //        EndDate = DateTime.MaxValue,
+        //        StartDate = DateTime.MinValue
+        //    }
+        //};
     }
 
     private async Task HandleValidSubmit()
     {
         var period = new ReportPeriod()
         {
-            Id =  Guid.NewGuid(),
+            Id = Guid.NewGuid(),
             Name = editPeriodModel.Name,
             StartDate = editPeriodModel.StartDate,
             EndDate = editPeriodModel.EndDate
