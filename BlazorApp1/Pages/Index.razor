@@ -103,6 +103,8 @@ else
 
     public List<Organisation> ChildOrgs { get; set; }
 
+    public bool authenticated;
+
     private string GetUserName()
     {
         StringBuilder builder = new StringBuilder();
@@ -132,15 +134,21 @@ else
         try
         {
             //User = await _context.Users.FindAsync(await LocalStorage.GetItemAsStringAsync("username"));
-            User = await _context.Users
-                .Include(u => u.Organisation)
-                .FirstOrDefaultAsync(x=> x.Username == "test");
-            
+            try
+            {
+                User = await LocalStorage.GetItemAsync<User>("user");
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
             ChildOrgs =  await _context
                                 .Organisations
                                 .Where(x=> x.HigherOrg == User.Organisation)
                                 .ToListAsync();
-            
+
         }
         catch (Exception e)
         {
