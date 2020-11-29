@@ -1,17 +1,40 @@
-﻿@using Blazored.LocalStorage;
-@using Microsoft.EntityFrameworkCore;
-@using Diplom.Shared.Model;
-@using BlazorApp1.Controllers 
+﻿@using System.ComponentModel.DataAnnotations
 @inject IDbContextFactory<AppDbContext> DbFactory
 @inject ILocalStorageService LocalStorage
 
+
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" height="256" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <EditForm Model="authModel" OnSubmit="LoginOnClick">
+            <DataAnnotationsValidator />
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" @bind="authModel.Username">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" @bind="authModel.Password">
+            <input type="submit" class="fadeIn fourth" value="Log In" />
+        </EditForm>
+
+    </div>
+</div>
+
 @code {
 
-    [Parameter]
-    public string Username { get; set; }
+    public class AuthModel
+    {
+        [Required]
+        public string Username { get; set; }
 
-    [Parameter]
-    public string Password { get; set; }
+        [Required]
+        public string Password { get; set; }
+    }
+
+    AuthModel authModel = new AuthModel();
 
     public User User { get; set; }
 
@@ -32,36 +55,13 @@
         catch (Exception)
         {
             Authenticated = false;
-            throw;
+
         }
     }
 
-    public EventCallback LoginOnClick()
+    void LoginOnClick(EditContext editContext)
     {
         Authenticator authenticator = new Authenticator(DbFactory, LocalStorage);
-        authenticator.Authenticate(Username, Password);
+        authenticator.Authenticate(authModel.Username, authModel.Password);
     }
 }
-
-<div class="wrapper fadeInDown">
-    <div id="formContent">
-        <!-- Tabs Titles -->
-        <!-- Icon -->
-        <div class="fadeIn first">
-            <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-        </div>
-
-        <!-- Login Form -->
-        <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" >
-            <input type="submit" class="fadeIn fourth" value="Log In" @onclick="LoginOnClick()">
-        </form>
-
-        <!-- Remind Passowrd -->
-        <div id="formFooter">
-            <a class="underlineHover" href="#">Forgot Password?</a>
-        </div>
-
-    </div>
-</div>

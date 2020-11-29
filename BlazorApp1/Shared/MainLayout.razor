@@ -4,6 +4,8 @@
 @{
     //ReportPeriod OP = localStorage.GetItemAsync<ReportPeriod>("currentOP");
 
+    bool isAuthenticated = false;
+
     ReportPeriod OP = new ReportPeriod
     {
         Name = "4 Квартал 2020",
@@ -20,15 +22,22 @@
 
     <div class="main">
         <div class="top-row px-4">
-            @if (localStorage.GetItemAsync<bool>("isAuthenticated").Result)
+            @try
             {
-                <a href="/Index"></a>
-                <a href="/ops">Текущий период: @OP.Name [@OP.StartDate - @OP.EndDate]</a>
-            }
-            else
-            {
+                @if (localStorage.GetItemAsync<bool>("isAuthenticated").Result)
+                {
+                    <a href="/Index"></a>
+                    <a href="/ops">Текущий период: @OP.Name [@OP.StartDate - @OP.EndDate]</a>
+                }
 
             }
+            catch (Exception e)
+            {
+                
+                @*<a href="AuthComonent">Вход</a>*@
+
+            }
+            
         </div>
 
         <div class="content px-4">
