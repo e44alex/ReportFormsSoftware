@@ -1,0 +1,145 @@
+﻿@page "/ops"
+@using Diplom.Shared.Model
+@using Microsoft.EntityFrameworkCore
+@using System.ComponentModel.DataAnnotations
+
+
+<h1>Отчетные периоды</h1>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createPeriodForm">
+    Добавить период
+</button>
+
+<div class="modal fade" id="createPeriodForm" tabindex="-1" role="dialog" aria-labelledby="createPeriodFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createPeriodFormLabel">Добавление периода</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="@editPeriodModel" OnValidSubmit="@HandleValidSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Наименование</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Наименование периода" @bind="editPeriodModel.Name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Дата начала</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" placeholder="Начало периода" @bind="editPeriodModel.StartDate">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Дата окончания</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" placeholder="Окончание периода" @bind="editPeriodModel.EndDate">
+                        </div>
+                    </div>
+                </EditForm>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Periods == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Наименование</th>
+            <th>Дата начала</th>
+            <th>Дата Окончания</th>
+        </tr>
+
+        @foreach (var period in Periods)
+        {
+            <tr>
+                <td>
+                    <button class="btn btn-outline-info">@period.Name</button>
+                </td>
+                <td>@period.StartDate.ToShortDateString()</td>
+                <td>@period.EndDate.ToShortDateString()</td>
+            </tr>
+        }
+
+    </table>
+}
+
+
+
+
+@code {
+
+    class EditModel
+    {
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime StartDate { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime EndDate { get; set; }
+    }
+
+    EditModel editPeriodModel = new EditModel();
+
+   
+
+    public List<ReportPeriod> Periods { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+
+        try
+        {
+           
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        //Periods = new List<ReportPeriod>()
+        //{
+        //    new ReportPeriod()
+        //    {
+        //        Name = "OP1",
+        //        EndDate = DateTime.MaxValue,
+        //        StartDate = DateTime.MinValue
+        //    }
+        //};
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        var period = new ReportPeriod()
+        {
+            Id = Guid.NewGuid(),
+            Name = editPeriodModel.Name,
+            StartDate = editPeriodModel.StartDate,
+            EndDate = editPeriodModel.EndDate
+        };
+
+    }
+
+
+
+}

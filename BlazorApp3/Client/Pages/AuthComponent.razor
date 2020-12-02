@@ -1,0 +1,86 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@using Diplom.Shared.Model
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.Extensions.DependencyInjection;
+@using System.Web;
+@inject JSRuntime JsRuntime
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" height="256" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <EditForm Model="@authModel" OnSubmit="LoginOnClick">
+            <DataAnnotationsValidator />
+            <input type="text" class="fadeIn second" placeholder="login" @bind="authModel.Username">
+            <input type="password" class="fadeIn third" placeholder="password" @bind="authModel.Password">
+            <input type="submit" class="fadeIn fourth" value="Log In" />
+        </EditForm>
+
+    </div>
+</div>
+
+@code {
+
+    public class AuthModel
+    {
+        [Required]
+        public string Username { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+    }
+
+    AuthModel authModel = new AuthModel();
+
+    public User User { get; set; }
+
+    public bool Authenticated { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine(authModel.Username);
+        Console.WriteLine(authModel.Password);
+
+        try
+        {
+            //User = await LocalStorage.GetItemAsync<User>("user");
+            if (User != null)
+            {
+                Authenticated = true;
+            }
+            Authenticated = false;
+            return;
+        }
+        catch (Exception)
+        {
+            Authenticated = false;
+        }
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+    }
+
+    void LoginOnClick(EditContext editContext)
+    {
+
+        using (var _context = new AppDbContext())
+        {
+            Console.WriteLine(authModel.Username);
+            Console.WriteLine(authModel.Password);
+
+            var user = _context.Users.Include(x => x.Organisation).FirstOrDefaultAsync(x => x.Username == authModel.Username);
+            if (User.Password == authModel.Password)
+            {
+                JsRuntime.InvokeAsync<string>("blazorExtensions.WriteCookie", "user", JsonSerializer.Serialize(User));
+            }
+        }
+    }
+}

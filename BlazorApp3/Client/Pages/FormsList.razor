@@ -1,0 +1,74 @@
+﻿@page "/formList/{orgId:int}"
+@using Diplom.Shared.Model
+@using Microsoft.EntityFrameworkCore
+
+
+<h1>Список форм</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Наименование</th>
+        <th>Дата начала</th>
+        <th>Дата Окончания</th>
+        <th>Статус</th>
+    </tr>
+    <tr class="bg-success">
+        <td>
+            <button class="btn btn-outline-dark">
+                Форма 1
+            </button>
+        </td>
+        <td>01.01.2020</td>
+        <td>01.04.2020</td>
+        <td>
+            <select class="form-control">
+                <option>Пусто</option>
+                <option>Черновик</option>
+                <option selected="selected">Заполнено</option>
+                <option>Проверено</option>
+                <option>Утверждено</option>
+            </select>
+        </td>
+    </tr>
+    <tr class="bg-primary">
+        <td>
+            <button class="btn btn-outline-dark">
+                Форма 2
+            </button>
+        </td>
+        <td>01.01.2020</td>
+        <td>01.04.2020</td>
+        <td>
+            <select class="form-control">
+                <option selected="selected">Пусто</option>
+                <option>Черновик</option>
+                <option>Заполнено</option>
+                <option>Проверено</option>
+                <option>Утверждено</option>
+            </select>
+        </td>
+    </tr>
+</table>
+
+@code{
+
+    [Parameter]
+    public int OrgId { get; set; }
+
+    public List<ReportForm> ReportForm { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        try
+        {
+           
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+}
